@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icluppppp/bloc/appcubit__cubit.dart';
@@ -19,6 +18,7 @@ class Log_in extends StatelessWidget {
   TextEditingController Age = TextEditingController();
   TextEditingController Height = TextEditingController();
   bool check = false;
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<Appcubit, Parent>(
@@ -44,7 +44,7 @@ class Log_in extends StatelessWidget {
                         children: [
                           Text("Email",
                               style:
-                              TextStyle(color: Colors.grey, fontSize: 25)),
+                                  TextStyle(color: Colors.grey, fontSize: 25)),
                           SizedBox(
                             height: 5,
                           ),
@@ -63,7 +63,7 @@ class Log_in extends StatelessWidget {
                             decoration: InputDecoration(
                                 hintText: "Please Enter your email ",
                                 hintStyle:
-                                TextStyle(fontWeight: FontWeight.bold),
+                                    TextStyle(fontWeight: FontWeight.bold),
                                 border: UnderlineInputBorder(),
                                 contentPadding: EdgeInsets.all(8),
                                 fillColor: Colors.white,
@@ -74,7 +74,7 @@ class Log_in extends StatelessWidget {
                           ),
                           Text("Password",
                               style:
-                              TextStyle(color: Colors.grey, fontSize: 25)),
+                                  TextStyle(color: Colors.grey, fontSize: 25)),
                           SizedBox(
                             height: 5,
                           ),
@@ -101,7 +101,7 @@ class Log_in extends StatelessWidget {
                                   },
                                 ),
                                 hintStyle:
-                                TextStyle(fontWeight: FontWeight.bold),
+                                    TextStyle(fontWeight: FontWeight.bold),
                                 border: UnderlineInputBorder(),
                                 contentPadding: EdgeInsets.all(8),
                                 fillColor: Colors.white,
@@ -119,8 +119,8 @@ class Log_in extends StatelessWidget {
                                     onPressed: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(builder: (context) {
-                                            return Sign_Up();
-                                          }));
+                                        return Sign_Up();
+                                      }));
                                     },
                                     child: Text('Dont have account')),
                                 SizedBox(
@@ -134,48 +134,50 @@ class Log_in extends StatelessWidget {
                                     if (FormKey.currentState!.validate()) {
                                       {
                                         for (int i = 0;
-                                        i < (cubit.tasks).length;
-                                        i++) {
+                                            i < (cubit.tasks).length;
+                                            i++) {
                                           if (cubit.tasks[i]['email'] ==
-                                              email.text &&
+                                                  email.text &&
                                               cubit.tasks[i]['password'] ==
                                                   password.text) {
                                             check = true;
+                                            index = i;
                                             break;
                                           } else if (cubit.tasks[i]['email'] ==
                                               email.text) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(const SnackBar(
-                                                content: Text(
-                                                    'Wrong Password')));
+                                                    content: Text(
+                                                        'Wrong Password')));
                                             return null;
                                           } else if (cubit.tasks[i]
-                                          ['password'] ==
+                                                  ['password'] ==
                                               password.text) {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(const SnackBar(
-                                                content:
-                                                Text('Wrong Email ')));
+                                                    content:
+                                                        Text('Wrong Email ')));
                                             return null;
                                           }
                                         }
                                         if (check == true) {
+                                          cubit.bb(index);
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) {
-                                                    return Profile();
-                                                  }));
+                                            return Profile();
+                                          }));
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(const SnackBar(
-                                              content: Text(
-                                                  'Wrong Email or Password')));
+                                                  content: Text(
+                                                      'Wrong Email or Password')));
                                         }
                                       }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
-                                          content: Text('Fill the data')));
+                                              content: Text('Fill the data')));
                                     }
                                   },
                                   child: Text('Login'),

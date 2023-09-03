@@ -9,6 +9,11 @@ class Appcubit extends Cubit<Parent> {
   bool passwordvisiablilty = false;
   bool passwordvisiablilty2 = false;
   bool checkemail = false;
+  String User_name = '';
+  String User_Email = '';
+  String User_phone = '';
+  String User_Age = '';
+  String User_Height = '';
 
   void createDatabase() {
     openDatabase(
@@ -16,9 +21,9 @@ class Appcubit extends Cubit<Parent> {
       version: 1,
       onCreate: (db, version) {
         db.execute('''CREATE TABLE user (id INTEGER PRIMARY KEY , name TEXT , email TEXT , phone INTEGER , password TEXT ,age INTEGER , height INTEGER)''').then(
-                (value) {
-              print("created");
-            }).catchError((e) {
+            (value) {
+          print("created");
+        }).catchError((e) {
           print("Error nnnnn");
         });
       },
@@ -77,5 +82,37 @@ class Appcubit extends Cubit<Parent> {
         break;
       }
     }
+  }
+
+  void saveusername(String v) {
+    User_name = v;
+    emit(Save_User_name());
+  }
+
+  void saveuseremail(String v) {
+    User_Email = v;
+    emit(Save_User_Email());
+  }
+
+  void saveuserphone(String v) {
+    User_phone = v;
+    emit(Save_User_phone());
+  }
+
+  void saveuserAge(String v) {
+    User_Age = v;
+    emit(Save_User_Age());
+  }
+
+  void saveuserheight(String v) {
+    User_Height = v;
+    emit(Save_User_Height());
+  }
+  void bb(int i) {
+    User_name = tasks[i]["name"].toString();
+    User_Email = tasks[i]["email"].toString();
+    User_phone = tasks[i]["phone"].toString();
+    User_Age = tasks[i]["age"].toString();
+    User_Height = tasks[i]["height"].toString();
   }
 }

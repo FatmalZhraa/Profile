@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:icluppppp/screens/ssign_up.dart';
+import 'package:icluppppp/screens/login.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/appcubit__cubit.dart';
@@ -14,7 +14,7 @@ class AppRoot extends StatelessWidget {
                 create: (context) => Appcubit(),
             ),
           ],
-          child: MaterialApp(home: Sign_Up(),),
+          child: MaterialApp(home: Log_in(),),
         );
     }
 }
