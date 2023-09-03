@@ -5,7 +5,6 @@ import 'package:icluppppp/bloc/appcubit__state.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<Appcubit, Parent>(
